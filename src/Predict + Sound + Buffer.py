@@ -51,7 +51,7 @@ while True:
 
         if class_label == previous:
             now = time.time()
-            if (now-start) >= 3:
+            if (now-start) >= 1.5:
                 if playedflag == 0:
                     playsound('asl-ml/Sounds/%s.mp3'%class_label)
                     playedflag = 1

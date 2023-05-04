@@ -2,45 +2,76 @@ import os
 import cv2
 from cvzone.HandTrackingModule import HandDetector
 import numpy as np
+import json
 
 img_size = 200
 cap = cv2.VideoCapture(0)
-directory = 'Dataset 3/'
 detector = HandDetector(maxHands=1)
 padding = 50
+data = {
+    'A': [],
+    'B': [],
+    'C': [],
+    'D': [],
+    'E': [],
+    'F': [],
+    'G': [],
+    'H': [],
+    'I': [],
+    'J': [],
+    'K': [],
+    'L': [],
+    'M': [],
+    'N': [],
+    'O': [],
+    'P': [],
+    'Q': [],
+    'R': [],
+    'S': [],
+    'T': [],
+    'U': [],
+    'V': [],
+    'W': [],
+    'X': [],
+    'Y': [],
+    'Z': [],
+    'del': [],
+    'space': [],
+             }
 
 while True:
     success, frame = cap.read()
-    frame = cv2.flip(frame, 1)
     hands, frame = detector.findHands(frame)
 
     count = {
-             'a': len(os.listdir(directory+"/A")),
-             'b': len(os.listdir(directory+"/B")),
-             'c': len(os.listdir(directory+"/C")),
-             'd': len(os.listdir(directory+"/D")),
-             'e': len(os.listdir(directory+"/E")),
-             'f': len(os.listdir(directory+"/F")),
-             'g': len(os.listdir(directory+"/G")),
-             'h': len(os.listdir(directory+"/H")),
-             'i': len(os.listdir(directory+"/I")),
-             'j': len(os.listdir(directory+"/J")),
-             'k': len(os.listdir(directory+"/K")),
-             'l': len(os.listdir(directory+"/L")),
-             'm': len(os.listdir(directory+"/M")),
-             'n': len(os.listdir(directory+"/N")),
-             'o': len(os.listdir(directory+"/O")),
-             'p': len(os.listdir(directory+"/P")),
-             'q': len(os.listdir(directory+"/Q")),
-             'r': len(os.listdir(directory+"/R")),
-             's': len(os.listdir(directory+"/S")),
-             't': len(os.listdir(directory+"/T")),
-             'u': len(os.listdir(directory+"/U")),
-             'v': len(os.listdir(directory+"/V")),
-             'w': len(os.listdir(directory+"/W")),
-             'x': len(os.listdir(directory+"/X")),
-             'y': len(os.listdir(directory+"/Y")),
-             'z': len(os.listdir(directory+"/Z"))
+             'a': 0,
+             'b': 0,
+             'c': 0,
+             'd': 0,
+             'e': 0,
+             'f': 0,
+             'g': 0,
+             'h': 0,
+             'i': 0,
+             'j': 0,
+             'k': 0,
+             'l': 0,
+             'm': 0,
+             'n': 0,
+             'o': 0,
+             'p': 0,
+             'q': 0,
+             'r': 0,
+             's': 0,
+             't': 0,
+             'u': 0,
+             'v': 0,
+             'w': 0,
+             'x': 0,
+             'y': 0,
+             'z': 0,
+             'del':0,
+             'space':0,
              }
 
     cv2.putText(frame, "a : "+str(count['a']), (10, 100), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
@@ -68,11 +99,12 @@ while True:
     cv2.putText(frame, "x : "+str(count['x']), (10, 320), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
     cv2.putText(frame, "y : "+str(count['y']), (10, 330), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
     cv2.putText(frame, "z : "+str(count['z']), (10, 340), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
+    cv2.putText(frame, "del : "+str(count['del']), (10, 340), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
+    cv2.putText(frame, "space : "+str(count['space']), (10, 340), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
 
     if hands:
         hand = hands[0]
         x, y, w, h = hand["bbox"]
-
         row = frame.shape[1]
         col = frame.shape[0]
         imgWhite = np.ones((img_size, img_size, 3), np.uint8) * 255
@@ -88,82 +120,120 @@ while True:
     interrupt = cv2.waitKey(1)
     if interrupt & 0xFF == ord('a'):
         print("a")
-        cv2.imwrite(directory+'A/'+str(count['a'])+'.png',imgWhite)
+        if hands:
+            data["A"].append(hand["lmList"])
     if interrupt & 0xFF == ord('b'):
         print("b")
-        cv2.imwrite(directory+'B/'+str(count['b'])+'.png',imgWhite)
+        if hands:
+            data["B"].append(hand["lmList"])
     if interrupt & 0xFF == ord('c'):
         print("c")
-        cv2.imwrite(directory+'C/'+str(count['c'])+'.png',imgWhite)
+        if hands:
+            data["C"].append(hand["lmList"])
     if interrupt & 0xFF == ord('d'):
         print("d")
-        cv2.imwrite(directory+'D/'+str(count['d'])+'.png',imgWhite)
+        if hands:
+            data["D"].append(hand["lmList"])
     if interrupt & 0xFF == ord('e'):
         print("e")
-        cv2.imwrite(directory+'E/'+str(count['e'])+'.png',imgWhite)
+        if hands:
+            data["E"].append(hand["lmList"])
     if interrupt & 0xFF == ord('f'):
         print("f")
-        cv2.imwrite(directory+'F/'+str(count['f'])+'.png',imgWhite)
+        if hands:
+            data["F"].append(hand["lmList"])
     if interrupt & 0xFF == ord('g'):
         print("g")
-        cv2.imwrite(directory+'G/'+str(count['g'])+'.png',imgWhite)
+        if hands:
+            data["G"].append(hand["lmList"])
     if interrupt & 0xFF == ord('h'):
         print("h")
-        cv2.imwrite(directory+'H/'+str(count['h'])+'.png',imgWhite)
+        if hands:
+            data["H"].append(hand["lmList"])
     if interrupt & 0xFF == ord('i'):
         print("i")        
-        cv2.imwrite(directory+'I/'+str(count['i'])+'.png',imgWhite)
+        if hands:
+            data["I"].append(hand["lmList"])
     if interrupt & 0xFF == ord('j'):
         print("j")
-        cv2.imwrite(directory+'J/'+str(count['j'])+'.png',imgWhite)
+        if hands:
+            data["J"].append(hand["lmList"])
     if interrupt & 0xFF == ord('k'):
         print("k")
-        cv2.imwrite(directory+'K/'+str(count['k'])+'.png',imgWhite)
+        if hands:
+            data["K"].append(hand["lmList"])
     if interrupt & 0xFF == ord('l'):
         print("l")
-        cv2.imwrite(directory+'L/'+str(count['l'])+'.png',imgWhite)
+        if hands:
+            data["L"].append(hand["lmList"])
     if interrupt & 0xFF == ord('m'):
         print("m")
-        cv2.imwrite(directory+'M/'+str(count['m'])+'.png',imgWhite)
+        if hands:
+            data["M"].append(hand["lmList"])
     if interrupt & 0xFF == ord('n'):
         print("n")
-        cv2.imwrite(directory+'N/'+str(count['n'])+'.png',imgWhite)
+        if hands:
+            data["N"].append(hand["lmList"])
     if interrupt & 0xFF == ord('o'):
         print("o")
-        cv2.imwrite(directory+'O/'+str(count['o'])+'.png',imgWhite)
+        if hands:
+            data["O"].append(hand["lmList"])
     if interrupt & 0xFF == ord('p'):
         print("p")
-        cv2.imwrite(directory+'P/'+str(count['p'])+'.png',imgWhite)
+        if hands:
+            data["P"].append(hand["lmList"])
     if interrupt & 0xFF == ord('q'):
         print("q")
-        cv2.imwrite(directory+'Q/'+str(count['q'])+'.png',imgWhite)
+        if hands:
+            data["Q"].append(hand["lmList"])
     if interrupt & 0xFF == ord('r'):
         print("r")
-        cv2.imwrite(directory+'R/'+str(count['r'])+'.png',imgWhite)
+        if hands:
+            data["R"].append(hand["lmList"])
     if interrupt & 0xFF == ord('s'):
         print("s")
-        cv2.imwrite(directory+'S/'+str(count['s'])+'.png',imgWhite)
+        if hands:
+            data["S"].append(hand["lmList"])
     if interrupt & 0xFF == ord('t'):
         print("t")
-        cv2.imwrite(directory+'T/'+str(count['t'])+'.png',imgWhite)
+        if hands:
+            data["T"].append(hand["lmList"])
     if interrupt & 0xFF == ord('u'):
         print("u")  
-        cv2.imwrite(directory+'U/'+str(count['u'])+'.png',imgWhite)
+        if hands:
+            data["U"].append(hand["lmList"])
     if interrupt & 0xFF == ord('v'):
         print("v")
-        cv2.imwrite(directory+'V/'+str(count['v'])+'.png',imgWhite)
+        if hands:
+            data["V"].append(hand["lmList"])
     if interrupt & 0xFF == ord('w'):
         print("w")
-        cv2.imwrite(directory+'W/'+str(count['w'])+'.png',imgWhite)
+        if hands:
+            data["W"].append(hand["lmList"])
     if interrupt & 0xFF == ord('x'):
         print("x")
-        cv2.imwrite(directory+'X/'+str(count['x'])+'.png',imgWhite)
+        if hands:
+            data["X"].append(hand["lmList"])
     if interrupt & 0xFF == ord('y'):
         print("y")
-        cv2.imwrite(directory+'Y/'+str(count['y'])+'.png',imgWhite)
+        if hands:
+            data["Y"].append(hand["lmList"])
     if interrupt & 0xFF == ord('z'):
         print("z")
-        cv2.imwrite(directory+'Z/'+str(count['z'])+'.png',imgWhite)
+        if hands:
+            data["Z"].append(hand["lmList"])
+    if interrupt & 0xFF == 0x08:
+        print("del")
+        if hands:
+            data["del"].append(hand["lmList"])
+    if interrupt & 0xFF == 0x20:
+        print("space")
+        if hands:
+            data["space"].append(hand["lmList"])
+    if interrupt & 0xFF == 0x0D:
+        print("Dump Data")
+        with open('output.json', 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False, indent=4)
 
 cap.release()
 cv2.destroyAllWindows()
